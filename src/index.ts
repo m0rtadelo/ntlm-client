@@ -9,17 +9,17 @@ export class NtlmClient {
   static cookie: any;
   static cookieJar: any;
   /**
-   * Request a url with Basic or NTLM authentication
-   * @param url or options object
-   * @param user param
-   * @param pwd param
+   * Request a url (with Basic or NTLM authentication if required)
+   * @param url the http(s) url to request from
+   * @param [user] param
+   * @param [pwd] param
    * @param [workstation] param
    * @param [domain] param
    * @param [options] object
    * @return response
    */
   public async request(
-      url:string|IOptionsHTTP|IOptionsHTTPS, user:string, pwd:string, workstation?:string,
+      url:string|IOptionsHTTP|IOptionsHTTPS, user:string='', pwd:string='', workstation?:string,
       domain?:string, options?: IOptionsHTTP|IOptionsHTTPS,
   ): Promise<IResult> {
     log({ name: 'request' }, options || { debug: (url as any).debug }, 'init request');
