@@ -17,6 +17,8 @@ export interface IResult {
 }
 
 interface IOptionsCustom {
+  /** content (body) of the request */
+  body?: any,
   /** http(s) url of the protected resource */
   url?: string,
   /** username of valid user (can be DOMAIN\username format) */

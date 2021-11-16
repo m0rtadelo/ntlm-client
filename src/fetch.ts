@@ -1,7 +1,7 @@
 import http from 'http';
 import https from 'https';
 import { IOptionsHTTP, IOptionsHTTPS, IResult } from './fetch.interface';
-import { createType1Message, createType3Message, decodeType2Message } from './ntlm';
+import { createBasicMessage, createType1Message, createType3Message, decodeType2Message } from './ntlm';
 import { log } from './utils';
 
 /**
@@ -71,6 +71,11 @@ export class Fetch {
           options.headers['Authorization'] = createType1Message(options.workstation, options.domain);
           log(this, options, 'Authorization header = '+ options.headers['Authorization']);
           Fetch.get(options, protocol, res, rej);
+        } else if (result.status === 401 && options.user && options.pwd && authMethods?.indexOf('basic') !== -1) {
+          options.headers['Authorization'] = createBasicMessage(options.user, options.pwd);
+          delete options.user;
+          delete options.pwd;
+          Fetch.get(options, protocol, res, rej);
         } else if (
           result.status > 399 && result.status < 500 &&
           options.user && options.pwd &&
@@ -94,6 +99,9 @@ export class Fetch {
         log(this, options, 'error on request!');
         rej(err);
       });
+      if (options.body) {
+        req.write(options.body);
+      }
       req.end();
     } catch (error) {
       log(this, options, 'error on try!');

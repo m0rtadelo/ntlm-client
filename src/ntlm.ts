@@ -6,7 +6,15 @@ import { createNTLMHash, createPseudoRandomValue, createLMv2Response, createNTLM
 import { IType2 } from './fetch.interface';
 
 const NTLMSIGNATURE = 'NTLMSSP\0';
-
+/**
+ * Returns the basic auth header
+ * @param user the username
+ * @param pwd the password
+ * @return the basic auth header
+ */
+export function createBasicMessage(user:string, pwd:string): string {
+  return 'Basic ' + Buffer.from(user + ':' + pwd, 'base64');
+}
 /**
  * Returns the type1 NTLM token
  * @param workstation param
