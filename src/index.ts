@@ -52,7 +52,7 @@ function setOptions(
   options.domain = domain;
   options.method = options.method || 'GET';
   options.headers = options.headers || {};
-  delete options.headers['Authorization'];
+  // delete options.headers['Authorization'];
   NtlmClient.tough = options.tough || NtlmClient.tough;
   if (options.tough) {
     log({ name: 'setOptions' }, options, 'tough-cookie detected, using this cookie jar...');

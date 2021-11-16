@@ -1,23 +1,26 @@
-# ntlm-client
+# Description
 
 A node.js http(s) client that allows to request unprotected and protected content using `Basic`, `NTLM v1` or `NTLM v2` authentication methods without using any dependency, uses native `http` and `https` nodejs modules.
 
+`NTLM` authentication method will be used first if the server allows. If fails, `Basic` authentication will be used. This order cannot be changed but an authentication method (NTLM or Basic) can be used by default if needed.
+
 > module with no DEPENDENCIES (low vulnerabilities)
 
-This module is compatible with `Javascript` and `Typescript` projects and can work with or without session manager.
+This module is compatible with `Javascript` and `Typescript` projects and can work with or without session/cookie manager.
 
 > CommonJS and ES6 compatible
 
-## Installation
+
+# Installation
 
 To use it in your project you must execute:
 ```
 npm install --save ntlm-client
 ```
 
-## Usage
+# Usage
 
-Usage examples of this module. You must import the module with `import` or `require` key:
+You must import the module with `import` or `require` key:
 ```javascript
 // ES6 import format
 import { NtlmClient } from 'ntlm-client';
@@ -41,13 +44,15 @@ client.request('https://ntlm.protected.data/items?id=26', 'user', 'pass')
   })
 ```
 > NOTE: Returns Promises.
-### GET request with full authentication
+# Examples
+Some usages examples of this module:
+## GET request with full authentication
 ```javascript
 const response = await client.request('http://ntlm.protected.data/items?id=26',
   'user', 'pass', 'workstation', 'domain'
 );
 ```
-### POST request (no data)
+## POST request (no data)
 ```javascript
 const response = await client.request(
   { url: 'https://ntlm.protected.data/items?id=26', method: 'POST' },
@@ -55,7 +60,7 @@ const response = await client.request(
 );
 ```
 
-### POST request (form data)
+## POST request (form data)
 ```javascript
 const response = await client.request(
   { 
@@ -70,7 +75,7 @@ const response = await client.request(
 );
 ```
 
-### POST request (json data)
+## POST request (json data)
 ```javascript
 const response = await client.request(
   { 
@@ -84,11 +89,11 @@ const response = await client.request(
   'user', 'pass'
 );
 ```
-### No auth GET request (standard https request with no authorization)
+## No auth GET request (standard https request with no authorization)
 ```javascript
 const response = await client.request('https://ntlm.protected.data/items?id=26');
 ```
-### GET request with session manager
+## GET request with session manager
 ```javascript
 const tough = require('tough-cookie');
 
@@ -98,7 +103,7 @@ const response = await client.request('http://ntlm.protected.data/items?id=26',
 ```
 >NOTE: this module works out of the box with tough-cookie (`npm i --save tough-cookie`)
 
-### GET request with predefined data session
+## GET request with predefined data session
 ```javascript
 const response = await client.request(
   {
@@ -108,3 +113,15 @@ const response = await client.request(
   'user', 'pass', 'workstation', 'domain'
 );
 ```
+
+## GET request using Basic auth (ntlm bypass)
+```javascript
+const response = await client.request(
+  {
+    url: 'http://ntlm.protected.data/items?id=26',
+    authMethod: ['ntlm']
+  },
+  'user', 'pass', 'workstation', 'domain'
+);
+```
+> To force Basic auth `ntlm` string should be in the authMethod array

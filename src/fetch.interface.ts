@@ -35,6 +35,8 @@ interface IOptionsCustom {
   tough?: any,
   cookie?: any,
   cookieJar?: any,
+  /** Stores the used auth method */
+  authMethod?:string[],
 }
 export interface IOptionsHTTP extends http.RequestOptions, IOptionsCustom {
 }
