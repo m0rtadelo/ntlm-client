@@ -1,5 +1,7 @@
 # Description
 
+> WIP/POC project
+
 A node.js http(s) client that allows to request unprotected and protected content using `Basic`, `NTLM v1` or `NTLM v2` authentication methods without using any dependency, uses native `http` and `https` nodejs modules.
 
 `NTLM` authentication method will be used first if the server allows. If fails, `Basic` authentication will be used. This order cannot be changed but an authentication method (NTLM or Basic) can be used by default if needed.
