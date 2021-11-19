@@ -22,7 +22,7 @@ jobs:
       - run: npm i
       - run: npm run doc
 
-      - name: Publish generated content to GitHub Pages
+      - name: Publish generated docs to GitHub Pages
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
         with:
           dir: docs
