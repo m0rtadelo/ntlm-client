@@ -57,10 +57,10 @@ const response = await client.request('http://ntlm.protected.data/items?id=26',
   'user', 'pass', 'workstation', 'domain'
 );
 ```
-## POST request (no data)
+## POST request (no data) with debug logger enabled
 ```javascript
 const response = await client.request(
-  { url: 'https://ntlm.protected.data/items?id=26', method: 'POST' },
+  { url: 'https://ntlm.protected.data/items?id=26', method: 'POST', debug: true },
   'user', 'pass'
 );
 ```
