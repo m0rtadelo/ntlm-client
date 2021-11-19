@@ -4,8 +4,6 @@
 [![npm version](https://badge.fury.io/js/node-client-ntlm.svg)](https://badge.fury.io/js/node-client-ntlm)
 # Description
 
-> WIP/POC project !!
-
 A node.js http(s) client that allows to request unprotected and protected content using `Basic`, `NTLM v1` or `NTLM v2` authentication methods without using any dependency, uses native `http` and `https` nodejs modules.
 
 `NTLM` authentication method will be used first if the server allows. If fails, `Basic` authentication will be used. This order cannot be changed but an authentication method (NTLM or Basic) can be used by default if needed.
@@ -31,7 +29,7 @@ You must import the module with `import` or `require` key:
 // ES6 import format
 import { NtlmClient } from 'ntlm-client';
 // CJS require format
-const NtlmClient = require('ntlm-client');
+const NtlmClient = require('ntlm-client').NtlmClient;
 ```
 
 Once imported a instance is needed:
