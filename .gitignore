@@ -3,3 +3,4 @@ lib/
 docs/*
 !docs/.keep
 *.tgz
+.vscode/
