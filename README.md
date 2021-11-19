@@ -39,7 +39,15 @@ const client = new NtlmClient();
 
 Use the instance to request protected content using user credentials:
 ```javascript
-client.request('https://ntlm.protected.data/items?id=26', 'user', 'pass')
+client.request({
+    url: 'https://ntlm.protected.data/collection',
+    method: 'PUT',
+    debug: false,
+    body: { foo: 'bar' },
+    headers: {
+      'content-type': 'application/json'
+    }
+  }, 'user', 'pass', 'workstation', 'domain')
   .then((response) => {
     console.log('Content body of the response', response.body);
     console.log('Headers of the response', response.headers);
