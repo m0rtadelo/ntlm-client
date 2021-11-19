@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 10.x ]    
+        node-version: [ 12.x ]    
     steps:
       - name: Check out
         uses: actions/checkout@v2
@@ -22,14 +22,14 @@ jobs:
       - run: npm i
       - run: npm run doc
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_dir: docs
-      # - name: Publish generated content to GitHub Pages
-      #   uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     dir: docs
-      #     branch: main
-      #     token: ${{ secrets.ACCESS_TOKEN }}
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     destination_dir: docs
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+        with:
+          dir: docs
+          branch: main
+          token: ${{ secrets.ACCESS_TOKEN }}
