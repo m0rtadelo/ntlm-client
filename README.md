@@ -81,7 +81,7 @@ const response = await client.request(
   { 
     url: 'https://ntlm.protected.data/items?id=26',
     method: 'POST',
-    body: 'foo=bar&var1=val1'
+    body: 'foo=bar&var1=val1',
     headers: {
       'content-type': 'application/x-www-form-urlencoded'
     }
@@ -96,7 +96,7 @@ const response = await client.request(
   { 
     url: 'https://ntlm.protected.data/items?id=26',
     method: 'POST',
-    body: { foo: 'bar' }
+    body: { foo: 'bar' },
     headers: {
       'content-type': 'application/json'
     }
