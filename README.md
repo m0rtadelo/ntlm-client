@@ -20,7 +20,7 @@ This module is compatible with `Javascript` and `Typescript` projects and can wo
 
 To use it in your project you must execute:
 ```
-npm install --save m0rtadelo/ntlm-client
+npm install --save node-client-ntlm
 ```
 
 # Usage

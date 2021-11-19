@@ -1,5 +1,5 @@
 {
-  "name": "m0rtadelo/ntlm-client",
+  "name": "node-client-ntlm",
   "version": "0.0.1",
   "description": "An http(s) NTLM client with NO dependencies",
   "main": "./lib/cjs/index.js",
