@@ -1,5 +1,6 @@
 import http from 'http';
 import https from 'https';
+import { RECURSIVE_LIMIT } from './fetch.constants';
 import { IOptionsHTTP, IOptionsHTTPS, IResult } from './fetch.interface';
 import { createBasicMessage, createType1Message, createType3Message, decodeType2Message } from './ntlm';
 import { log } from './utils';
@@ -32,14 +33,19 @@ export class Fetch {
    */
   private static get(options: IOptionsHTTP|IOptionsHTTPS, protocol: typeof http| typeof https, res: any, rej: any) {
     const result: IResult = { body: '', headers: {}, status: 0, options };
+    (options.requests as number)++;
+    log(this, options, `requesting (${options.requests}/${RECURSIVE_LIMIT}) ${options.url}`);
+    if ((options.requests as number) > RECURSIVE_LIMIT) {
+      rej(`recursive request limit (${RECURSIVE_LIMIT}) excedeed!`);
+      return;
+    }
     try {
-      log(this, options, 'requesting ' + options.url);
       Fetch.setHeaders(options);
       const req = protocol.request((options.url as string), options, (response) => {
         log(this, options, 'response ' + response?.statusCode + ' from ' + options.url);
         Fetch.setListeners(response, options, result, res);
         Fetch.setCookie(options, response);
-        const authMethods = Fetch.getAuthMethods(result, response);
+        const authMethods = Fetch.getAuthMethods(result, response, options);
         if (
           result.status === 401 &&
           options.user && options.pwd &&
@@ -100,12 +106,25 @@ export class Fetch {
   private static executeRedirect(
       options: IOptionsHTTP | IOptionsHTTPS, result: IResult, protocol: typeof http | typeof https, res: any, rej: any,
   ) {
+    const getUrl = () => {
+      const to = (result.headers['Location'] as string);
+      if (to.startsWith('http:') || 'https:') {
+        return to;
+      }
+      const url = new URL((options.url as string));
+      if (to.startsWith('/')) {
+        return url.origin + to;
+      }
+      const parts = options.url?.split('/');
+      const sanitized = parts?.slice(0, parts.length - 1);
+      return sanitized?.join('/').concat('/').concat(to);
+    };
     log(this, options, result.status + ' Location/Redirect -> ' + result.headers['Location']);
     if (result.status === 301) {
       log(this, options, 'setting request method to GET (301 status code requeriment)');
       options.method = 'GET';
     }
-    options.url = result.headers['Location'];
+    options.url = getUrl();
     Fetch.get(options, protocol, res, rej);
   }
 
@@ -125,7 +144,7 @@ export class Fetch {
   }
 
   /**
-   * Execute the NTLM step 2 request
+   * Execute the NTLM step 2 request by decoding the server response and creating the new message authorization header
    * @param result the Result object
    * @param options the Options object
    * @param response the Response object
@@ -151,7 +170,7 @@ export class Fetch {
   }
 
   /**
-   * Execute the Basic request
+   * Execute the Basic request creating a authorization header base64 hash using user and pwd
    * @param options the Options object
    * @param protocol the Protocol object (http or https)
    * @param res the Promise Resolve function
@@ -179,7 +198,7 @@ export class Fetch {
     delete options.domain;
   }
   /**
-   * xecute the NTLM step 1 request
+   * Execute the NTLM step 1 request creating the authorization Type1 header message
    * @param options the Options object
    * @param protocol the Protocol object (http or https)
    * @param res the Promise Resolve function
@@ -202,17 +221,21 @@ export class Fetch {
    * Returns the available server auth methods
    * @param result the Result object
    * @param response the Response object
-   * @returns authMethods
+   * @param options the Options object
+   * @return authMethods
    */
-  private static getAuthMethods(result: IResult, response: http.IncomingMessage): Array<string>|undefined {
+  private static getAuthMethods(
+      result: IResult, response: http.IncomingMessage, options: IOptionsHTTP | IOptionsHTTPS,
+  ): Array<string>|undefined {
     result.resolve = false;
     result.status = response.statusCode || 0;
     result.headers = response.headers;
+    log(this, options, 'www-authenticate header = ' + response.headers?.['www-authenticate']);
     return response.headers?.['www-authenticate']?.split(',').map((i) => i.trim().toLowerCase());
   }
 
   /**
-   * Adds the cookie (if one) from header into the jar
+   * Adds the cookie (if one) from header into the jar (if one)
    * @param options the Options object
    * @param response the Response object
    * @return void

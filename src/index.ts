@@ -52,6 +52,7 @@ function setOptions(
   options.domain = domain;
   options.method = options.method || 'GET';
   options.headers = options.headers || {};
+  options.requests = 0;
   // delete options.headers['Authorization'];
   NtlmClient.tough = options.tough || NtlmClient.tough;
   if (options.tough) {

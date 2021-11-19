@@ -39,6 +39,8 @@ interface IOptionsCustom {
   authMethod?:string[],
   /** Disables the interception of redirect responses */
   disableRedirect?: boolean,
+  /** Requests counter */
+  requests?: number,
 }
 export interface IOptionsHTTP extends http.RequestOptions, IOptionsCustom {
 }
