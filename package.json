@@ -1,5 +1,5 @@
 {
-  "name": "ntlm-client",
+  "name": "m0rtadelo/ntlm-client",
   "version": "0.0.1",
   "description": "An http(s) NTLM client with NO dependencies",
   "main": "./lib/cjs/index.js",
@@ -20,7 +20,8 @@
     "ntlmv2",
     "client",
     "request",
-    "node"
+    "node",
+    "native"
   ],
   "author": "ricard.figuls@gmail.com",
   "license": "ISC",
