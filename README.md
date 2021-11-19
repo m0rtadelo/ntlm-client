@@ -1,5 +1,6 @@
-![Build](https://github.com/m0rtadelo/ntlm-client/actions/workflows/pages.yml/badge.svg)[![Known Vulnerabilities](https://snyk.io//test/github/m0rtadelo/ntlm-client/badge.svg?targetFile=package.json)](https://snyk.io//test/github/m0rtadelo/ntlm-client?targetFile=package.json)
+![Build](https://github.com/m0rtadelo/ntlm-client/actions/workflows/pages.yml/badge.svg)
 [![Known Vulnerabilities](https://snyk.io//test/github/m0rtadelo/ntlm-client/badge.svg?targetFile=package.json)](https://snyk.io//test/github/m0rtadelo/ntlm-client?targetFile=package.json)
+![GitHub top language](https://img.shields.io/github/languages/top/m0rtadelo/ntlm-client.svg)
 # Description
 
 > WIP/POC project
