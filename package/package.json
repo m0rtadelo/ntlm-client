@@ -1,6 +1,6 @@
 {
   "name": "ntlm-client",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An http(s) NTLM client with NO dependencies",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
