@@ -1,7 +1,7 @@
 ![Build](https://github.com/m0rtadelo/ntlm-client/actions/workflows/pages.yml/badge.svg)
 [![Known Vulnerabilities](https://snyk.io//test/github/m0rtadelo/ntlm-client/badge.svg?targetFile=package.json)](https://snyk.io//test/github/m0rtadelo/ntlm-client?targetFile=package.json)
 ![GitHub top language](https://img.shields.io/github/languages/top/m0rtadelo/ntlm-client.svg)
-[![npm version](https://badge.fury.io/js/to-excel.svg)](https://badge.fury.io/js/to-excel)
+[![npm version](https://badge.fury.io/js/node-client-ntlm.svg)](https://badge.fury.io/js/node-client-ntlm)
 # Description
 
 > WIP/POC project !!
