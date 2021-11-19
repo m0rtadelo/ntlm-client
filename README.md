@@ -3,7 +3,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/m0rtadelo/ntlm-client.svg)
 # Description
 
-> WIP/POC project
+> WIP/POC project !!
 
 A node.js http(s) client that allows to request unprotected and protected content using `Basic`, `NTLM v1` or `NTLM v2` authentication methods without using any dependency, uses native `http` and `https` nodejs modules.
 
@@ -20,7 +20,7 @@ This module is compatible with `Javascript` and `Typescript` projects and can wo
 
 To use it in your project you must execute:
 ```
-npm install --save ntlm-client
+npm install --save m0rtadelo/ntlm-client
 ```
 
 # Usage
