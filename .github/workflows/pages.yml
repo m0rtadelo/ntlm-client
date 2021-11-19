@@ -1,4 +1,4 @@
-name: Publish to GitHub Pages
+name: CI Build
 
 on:
   push:

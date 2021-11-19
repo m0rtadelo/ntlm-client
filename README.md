@@ -1,3 +1,4 @@
+![Build](https://github.com/m0rtadelo/ntlm-client/actions/workflows/pages.yml/badge.svg)
 # Description
 
 > WIP/POC project
