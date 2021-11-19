@@ -27,9 +27,9 @@ npm install --save node-client-ntlm
 You must import the module with `import` or `require` key:
 ```javascript
 // ES6 import format
-import { NtlmClient } from 'ntlm-client';
+import { NtlmClient } from 'node-client-ntlm';
 // CJS require format
-const NtlmClient = require('ntlm-client').NtlmClient;
+const NtlmClient = require('node-client-ntlm').NtlmClient;
 ```
 
 Once imported a instance is needed:
