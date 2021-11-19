@@ -37,6 +37,8 @@ interface IOptionsCustom {
   cookieJar?: any,
   /** Stores the used auth method */
   authMethod?:string[],
+  /** Disables the interception of redirect responses */
+  disableRedirect?: boolean,
 }
 export interface IOptionsHTTP extends http.RequestOptions, IOptionsCustom {
 }

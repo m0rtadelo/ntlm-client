@@ -10,7 +10,7 @@ import { log } from './utils';
 export class Fetch {
   /**
    * Requests a NTLM protected http(s) url using options values
-   * @param options param
+   * @param options the Options object
    * @return the response
    */
   static request(options:IOptionsHTTP|IOptionsHTTPS): Promise<IResult> {
@@ -24,10 +24,10 @@ export class Fetch {
 
   /**
    * Requests a NTLM protected http(s) url using param values
-   * @param options param
-   * @param protocol param
-   * @param res param
-   * @param rej param
+   * @param options the Options object
+   * @param protocol the Protocol object (http or https)
+   * @param res the Promise Resolve function
+   * @param rej the Promise Reject function
    * @return void
    */
   private static get(options: IOptionsHTTP|IOptionsHTTPS, protocol: typeof http| typeof https, res: any, rej: any) {
@@ -61,6 +61,13 @@ export class Fetch {
           options.authMethod?.includes('ntlm')
         ) {
           Fetch.executeNTLM2(result, options, response, protocol, res, rej);
+        } else if (
+          result.headers?.['Location'] &&
+          result.status > 300 &&
+          result.status < 310 &&
+          !options.disableRedirect
+        ) {
+          Fetch.executeRedirect(options, result, protocol, res, rej);
         } else {
           (options.agent as https.Agent|https.Agent)?.destroy();
           log(this, options, 'this request can be resolved');
@@ -80,9 +87,31 @@ export class Fetch {
       rej(error);
     }
   }
+
+  /**
+   * Follow request redirects
+   * @param options the Options object
+   * @param result the Result object
+   * @param protocol the Protocol object (http or https)
+   * @param res the Promise Resolve function
+   * @param rej the Promise Reject function
+   * @return void
+   */
+  private static executeRedirect(
+      options: IOptionsHTTP | IOptionsHTTPS, result: IResult, protocol: typeof http | typeof https, res: any, rej: any,
+  ) {
+    log(this, options, result.status + ' Location/Redirect -> ' + result.headers['Location']);
+    if (result.status === 301) {
+      log(this, options, 'setting request method to GET (301 status code requeriment)');
+      options.method = 'GET';
+    }
+    options.url = result.headers['Location'];
+    Fetch.get(options, protocol, res, rej);
+  }
+
   /**
    * Sets the Cookie header
-   * @param options param
+   * @param options the Options object
    * @return void
    */
   private static setHeaders(options: IOptionsHTTP | IOptionsHTTPS) {
@@ -97,12 +126,12 @@ export class Fetch {
 
   /**
    * Execute the NTLM step 2 request
-   * @param result param
-   * @param options param
-   * @param response param
-   * @param protocol param
-   * @param res param
-   * @param rej param
+   * @param result the Result object
+   * @param options the Options object
+   * @param response the Response object
+   * @param protocol the Protocol object (http or https)
+   * @param res the Promise Resolve function
+   * @param rej the Promise Reject function
    * @return void
    */
   private static executeNTLM2(
@@ -123,10 +152,10 @@ export class Fetch {
 
   /**
    * Execute the Basic request
-   * @param options param
-   * @param protocol param
-   * @param res param
-   * @param rej param
+   * @param options the Options object
+   * @param protocol the Protocol object (http or https)
+   * @param res the Promise Resolve function
+   * @param rej the Promise Reject function
    * @return void
    */
   private static executeBasic(
@@ -140,7 +169,7 @@ export class Fetch {
   }
   /**
    * Deletes credentials from option object
-   * @param options param
+   * @param options the Options object
    * @return void
    */
   private static deleteCredentials(options: IOptionsHTTP | IOptionsHTTPS) {
@@ -151,10 +180,10 @@ export class Fetch {
   }
   /**
    * xecute the NTLM step 1 request
-   * @param options param
-   * @param protocol param
-   * @param res param
-   * @param rej param
+   * @param options the Options object
+   * @param protocol the Protocol object (http or https)
+   * @param res the Promise Resolve function
+   * @param rej the Promise Reject function
    * @return void
    */
   private static executeNTLM1(
@@ -171,8 +200,8 @@ export class Fetch {
 
   /**
    * Returns the available server auth methods
-   * @param result param
-   * @param response param
+   * @param result the Result object
+   * @param response the Response object
    * @returns authMethods
    */
   private static getAuthMethods(result: IResult, response: http.IncomingMessage): Array<string>|undefined {
@@ -184,8 +213,8 @@ export class Fetch {
 
   /**
    * Adds the cookie (if one) from header into the jar
-   * @param options param
-   * @param response param
+   * @param options the Options object
+   * @param response the Response object
    * @return void
    */
   private static setCookie(options: IOptionsHTTP | IOptionsHTTPS, response: http.IncomingMessage) {
@@ -200,10 +229,10 @@ export class Fetch {
 
   /**
    * Sets the response listeners
-   * @param response param
-   * @param options param
-   * @param result param
-   * @param res param
+   * @param response the Response object
+   * @param options the Options object
+   * @param result the Result object
+   * @param res the Promise Resolve function
    * @return void
    */
   private static setListeners(
