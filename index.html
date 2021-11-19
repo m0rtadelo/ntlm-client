@@ -6,9 +6,6 @@
 <a href="#description" id="description" style="color: inherit; text-decoration: none;">
   <h1>Description</h1>
 </a>
-<blockquote>
-<p>WIP/POC project !!</p>
-</blockquote>
 <p>A node.js http(s) client that allows to request unprotected and protected content using <code>Basic</code>, <code>NTLM v1</code> or <code>NTLM v2</code> authentication methods without using any dependency, uses native <code>http</code> and <code>https</code> nodejs modules.</p>
 <p><code>NTLM</code> authentication method will be used first if the server allows. If fails, <code>Basic</code> authentication will be used. This order cannot be changed but an authentication method (NTLM or Basic) can be used by default if needed.</p>
 <blockquote>
@@ -30,7 +27,7 @@
   <h1>Usage</h1>
 </a>
 <p>You must import the module with <code>import</code> or <code>require</code> key:</p>
-<pre><code class="language-javascript"><span class="hl-2">// ES6 import format</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-0">NtlmClient</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-4">&#39;ntlm-client&#39;</span><span class="hl-1">;</span><br/><span class="hl-2">// CJS require format</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">NtlmClient</span><span class="hl-1"> = </span><span class="hl-7">require</span><span class="hl-1">(</span><span class="hl-4">&#39;ntlm-client&#39;</span><span class="hl-1">);</span>
+<pre><code class="language-javascript"><span class="hl-2">// ES6 import format</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-0">NtlmClient</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-4">&#39;node-client-ntlm&#39;</span><span class="hl-1">;</span><br/><span class="hl-2">// CJS require format</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">NtlmClient</span><span class="hl-1"> = </span><span class="hl-7">require</span><span class="hl-1">(</span><span class="hl-4">&#39;node-client-ntlm&#39;</span><span class="hl-1">).</span><span class="hl-0">NtlmClient</span><span class="hl-1">;</span>
 </code></pre>
 <p>Once imported a instance is needed:</p>
 <pre><code class="language-javascript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">client</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-7">NtlmClient</span><span class="hl-1">();</span>
