@@ -41,7 +41,9 @@ Use the instance to request protected content using user credentials:
 ```javascript
 client.request('https://ntlm.protected.data/items?id=26', 'user', 'pass')
   .then((response) => {
-    console.log(response);
+    console.log('Content body of the response', response.body);
+    console.log('Headers of the response', response.headers);
+    console.log('StatusCode of the response', response.status);
   })
   .catch((error) => {
     console.error(error)
