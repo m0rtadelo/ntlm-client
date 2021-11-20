@@ -1,7 +1,6 @@
 node_modules/
 lib/
-docs/*
-!docs/.keep
+docs/
 *.tgz
 .vscode/
 coverage/
