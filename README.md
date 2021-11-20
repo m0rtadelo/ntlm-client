@@ -43,6 +43,7 @@ client.request({
     url: 'https://ntlm.protected.data/collection',
     method: 'PUT',
     debug: false,
+    disableRedirect: false,
     body: { foo: 'bar' },
     headers: {
       'content-type': 'application/json'
@@ -60,6 +61,7 @@ client.request({
 > NOTE: Returns Promises.
 # Examples
 Full documentation available at https://m0rtadelo.github.io/ntlm-client/
+
 Some usages examples of this module:
 ## GET request with full authentication
 ```javascript
