@@ -108,10 +108,11 @@ export class Fetch {
   ) {
     const getUrl = () => {
       const to = (result.headers['Location'] as string);
-      if (to.startsWith('http:') || 'https:') {
+      if (to.startsWith('http:') || to.startsWith('https:')) {
         return to;
       }
-      const url = new URL((options.url as string));
+      console.log(options);
+      const url = new URL(options.url as string);
       if (to.startsWith('/')) {
         return url.origin + to;
       }
@@ -119,7 +120,7 @@ export class Fetch {
       const sanitized = parts?.slice(0, parts.length - 1);
       return sanitized?.join('/').concat('/').concat(to);
     };
-    log(this, options, result.status + ' Location/Redirect -> ' + result.headers['Location']);
+    log(this, options, result.status + ' Location/Redirect ' + options.url + ' -> ' + result.headers['Location']);
     if (result.status === 301) {
       log(this, options, 'setting request method to GET (301 status code requeriment)');
       options.method = 'GET';

@@ -1,12 +1,13 @@
 import { log } from '../src/utils';
 
-it('should load', () => {
-  expect(log).toBeDefined();
-});
 
 describe('utils test', () => {
   beforeEach(() => {
     console.log = jest.fn();
+  });
+
+  it('should load', () => {
+    expect(log).toBeDefined();
   });
 
   it('should log with options.debug = true', () => {
