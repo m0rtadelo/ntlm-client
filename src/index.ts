@@ -23,7 +23,7 @@ export class NtlmClient {
       domain?:string, options?: IOptionsHTTP|IOptionsHTTPS,
   ): Promise<IResult> {
     log({ name: 'request' }, options || { debug: (url as any).debug }, 'init request');
-    return await Fetch.request(setOptions(url, user, pwd, workstation, domain, options));
+    return Fetch.request(setOptions(url, user, pwd, workstation, domain, options));
   }
 }
 /**
@@ -53,7 +53,6 @@ function setOptions(
   options.method = options.method || 'GET';
   options.headers = options.headers || {};
   options.requests = 0;
-  // delete options.headers['Authorization'];
   NtlmClient.tough = options.tough || NtlmClient.tough;
   if (options.tough) {
     log({ name: 'setOptions' }, options, 'tough-cookie detected, using this cookie jar...');

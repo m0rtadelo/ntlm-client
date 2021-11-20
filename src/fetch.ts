@@ -75,7 +75,7 @@ export class Fetch {
         ) {
           Fetch.executeRedirect(options, result, protocol, res, rej);
         } else {
-          (options.agent as https.Agent|https.Agent)?.destroy();
+          (options.agent as http.Agent|https.Agent)?.destroy();
           log(this, options, 'this request can be resolved');
           result.resolve = true;
         }
