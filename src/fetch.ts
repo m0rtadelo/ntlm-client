@@ -111,7 +111,6 @@ export class Fetch {
       if (to.startsWith('http:') || to.startsWith('https:')) {
         return to;
       }
-      console.log(options);
       const url = new URL(options.url as string);
       if (to.startsWith('/')) {
         return url.origin + to;
