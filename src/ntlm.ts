@@ -13,7 +13,7 @@ const NTLMSIGNATURE = 'NTLMSSP\0';
  * @return the basic auth header
  */
 export function createBasicMessage(user:string, pwd:string): string {
-  return 'Basic ' + Buffer.from(user + ':' + pwd, 'base64');
+  return 'Basic ' + Buffer.from(user + ':' + pwd, 'utf8').toString('base64');
 }
 /**
  * Returns the type1 NTLM token

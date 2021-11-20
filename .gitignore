@@ -4,3 +4,4 @@ docs/*
 !docs/.keep
 *.tgz
 .vscode/
+coverage/

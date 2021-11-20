@@ -8,7 +8,7 @@ import { IOptionsHTTP, IOptionsHTTPS } from './fetch.interface';
  * @return void
  */
 export function log(ctx: any, options: IOptionsHTTP|IOptionsHTTPS, msg:any) {
-  if (options?.debug) {
+  if (options.debug) {
     console.log('ntlm-client@m0rtadelo [' + ctx?.name + '] ' + msg);
   }
 }
