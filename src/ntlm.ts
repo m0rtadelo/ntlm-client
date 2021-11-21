@@ -63,7 +63,6 @@ export function createType1Message(workstation:string|undefined=undefined, targe
   buf.writeUInt16LE(workstation.length, pos);
   pos += 2;
   buf.writeUInt32LE(workstation.length === 0 ? 0 : dataPos, pos);
-  pos += 4;
 
   if (workstation.length > 0) {
     dataPos += buf.write(workstation, dataPos, 'ascii');
@@ -243,8 +242,8 @@ export function createType3Message(
 
     const ntlmHash = createNTLMHash(password);
     const nonce = createPseudoRandomValue(16);
-    const lmv2 = createLMv2Response(type2Message, username, ntlmHash, nonce, (target as string));
-    const ntlmv2 = createNTLMv2Response(type2Message, username, ntlmHash, nonce, (target as string));
+    const lmv2 = createLMv2Response(type2Message, username, ntlmHash, nonce, target);
+    const ntlmv2 = createNTLMv2Response(type2Message, username, ntlmHash, nonce, target);
 
     // lmv2 security buffer
     buf.writeUInt16LE(lmv2.length, 12);
@@ -285,11 +284,11 @@ export function createType3Message(
   }
 
   // target name security buffer
-  buf.writeUInt16LE(type2Message.encoding === 'ascii' ? (target as string).length : (target as string).length * 2, 28);
-  buf.writeUInt16LE(type2Message.encoding === 'ascii' ? (target as string).length : (target as string).length * 2, 30);
+  buf.writeUInt16LE(type2Message.encoding === 'ascii' ? target.length : target.length * 2, 28);
+  buf.writeUInt16LE(type2Message.encoding === 'ascii' ? target.length : target.length * 2, 30);
   buf.writeUInt32LE(dataPos, 32);
 
-  dataPos += buf.write((target as string), dataPos, type2Message.encoding);
+  dataPos += buf.write(target, dataPos, type2Message.encoding);
 
   // user name security buffer
   buf.writeUInt16LE(type2Message.encoding === 'ascii' ? username.length : username.length * 2, 36);

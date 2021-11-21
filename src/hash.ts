@@ -180,8 +180,6 @@ export function createNTLMv2Response(
   buf.writeUInt32LE(0, 20);
 
   // timestamp
-  // TODO: we are loosing precision here since js is not able to handle those large integers
-  // maybe think about a different solution here
   // 11644473600000 = diff between 1970 and 1601
   const timestamp = ((Date.now() + 11644473600000) * 10000).toString(16);
   const timestampLow = Number('0x' + timestamp.substring(Math.max(0, timestamp.length - 8)));
