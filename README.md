@@ -1,4 +1,5 @@
 ![Build](https://github.com/m0rtadelo/ntlm-client/actions/workflows/pages.yml/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=m0rtadelo_ntlm-client&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=m0rtadelo_ntlm-client)
 [![Known Vulnerabilities](https://snyk.io//test/github/m0rtadelo/ntlm-client/badge.svg?targetFile=package.json)](https://snyk.io//test/github/m0rtadelo/ntlm-client?targetFile=package.json)
 ![GitHub top language](https://img.shields.io/github/languages/top/m0rtadelo/ntlm-client.svg)
 [![npm version](https://badge.fury.io/js/node-client-ntlm.svg)](https://badge.fury.io/js/node-client-ntlm)
