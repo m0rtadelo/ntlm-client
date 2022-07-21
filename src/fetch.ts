@@ -265,6 +265,13 @@ export class Fetch {
       log(this, options, 'data received ' + data.length + ' bytes chunk');
       result.body += data;
     });
+    response.on('close', () => {
+      if (result.resolve) {
+        log(this, options, 'resolve with ' + result.status);
+        delete result.resolve;
+        res(result);
+      }
+    });
     response.on('end', () => {
       if (result.resolve) {
         log(this, options, 'resolve with ' + result.status);
