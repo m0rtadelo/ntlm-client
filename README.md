@@ -9,7 +9,9 @@ A node.js http(s) client that allows to request unprotected and protected conten
 
 `NTLM` authentication method will be used first if the server allows. If fails, `Basic` authentication will be used. This order cannot be changed but an authentication method (NTLM or Basic) can be used by default if needed.
 
-> module with no DEPENDENCIES (low vulnerabilities)
+> The module has 1 dependency (js-md4) because the md4 hash has been removed from node crypto.
+
+> Works with node 21
 
 This module is compatible with `Javascript` and `Typescript` projects and can work with or without session/cookie manager.
 
