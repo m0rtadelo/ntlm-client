@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+const md4 = require('js-md4');
 
 /**
  * Generates a LM response
@@ -100,9 +101,10 @@ export function createNTLMResponse(challenge:any, ntlmhash:any): Buffer {
  * @return the response
  */
 export function createNTLMHash(password:string): Buffer {
-  const md4sum = crypto.createHash('md4');
+  const md4sum = md4.create();
   md4sum.update(Buffer.from(password, 'ucs2'));
-  return md4sum.digest();
+  const digest = Buffer.from(md4sum.digest(), 'hex');
+  return digest;
 }
 
 /**

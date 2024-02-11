@@ -48,5 +48,8 @@
   "bugs": {
     "url": "https://github.com/m0rtadelo/ntlm-client/issues"
   },
-  "homepage": "https://m0rtadelo.github.io/ntlm-client/"
+  "homepage": "https://m0rtadelo.github.io/ntlm-client/",
+  "dependencies": {
+    "js-md4": "^0.3.2"
+  }
 }

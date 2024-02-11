@@ -35,7 +35,6 @@ describe('mock test', () => {
   });
   afterAll(() => {
     server.close(() => {
-      console.log('Server closed');
     });
   });
   it('should work with real server (correct username)', async () => {
