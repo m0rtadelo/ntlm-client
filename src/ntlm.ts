@@ -83,7 +83,7 @@ export function decodeType2Message(str:any): IType2 {
 
   // convenience
   if (Object.prototype.toString.call(str) !== '[object String]') {
-    if (str.hasOwnProperty('headers') && str.headers.hasOwnProperty('www-authenticate')) {
+    if ('headers' in str && str.headers.hasOwnProperty('www-authenticate')) {
       str = str.headers['www-authenticate'];
     } else {
       throw new Error('Invalid argument');
